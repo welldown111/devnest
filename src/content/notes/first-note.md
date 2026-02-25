@@ -17,6 +17,11 @@ description: "这是一篇示例笔记，展示格式效果。"
 const hello = "world";
 ```
 
+```python
+// 看看python代码
+print("hello world")
+```
+
 > 引用块长这样。
 
 ## 列表
