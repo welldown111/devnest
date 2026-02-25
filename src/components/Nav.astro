@@ -1,5 +1,5 @@
 ---
-const base = '/devnest';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const nav = [
   { href: `${base}/`, label: "Home" },
   { href: `${base}/tools`, label: "Tools" },
