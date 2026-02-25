@@ -10,7 +10,7 @@ const current = Astro.url.pathname;
 
 <nav>
   <div class="inner">
-    <a href="/" class="logo">devnest</a>
+    <a href={`${base}/`} class="logo">devnest</a>
     <ul>
       {nav.map(({ href, label }) => (
         <li>
