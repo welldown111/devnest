@@ -1,0 +1,59 @@
+---
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/tools", label: "Tools" },
+  { href: "/notes", label: "Notes" },
+];
+const current = Astro.url.pathname;
+---
+
+<nav>
+  <div class="inner">
+    <a href="/" class="logo">devnest</a>
+    <ul>
+      {nav.map(({ href, label }) => (
+        <li>
+          <a href={href} class={current === href ? "active" : ""}>{label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  nav {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.15s;
+  }
+  a:hover, a.active { color: var(--text); }
+</style>

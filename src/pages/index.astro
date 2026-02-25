@@ -1,0 +1,58 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+---
+
+<Layout title="Home">
+  <Nav slot="nav" />
+  <section class="hero">
+    <h1>Hey, I'm James</h1>
+    <p>A personal space for tools I've built and notes I've taken.</p>
+  </section>
+  <section class="cards">
+    <a href="/tools" class="card">
+      <span class="icon">⚙️</span>
+      <h2>Tools</h2>
+      <p>Small utilities I made to solve real problems.</p>
+    </a>
+    <a href="/notes" class="card">
+      <span class="icon">📝</span>
+      <h2>Notes</h2>
+      <p>Things I've learned and want to remember.</p>
+    </a>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    padding: 4rem 0 3rem;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 0.75rem;
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .icon { font-size: 1.5rem; }
+  .card h2 { margin: 0.75rem 0 0.4rem; font-size: 1.1rem; }
+  .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+</style>

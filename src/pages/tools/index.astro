@@ -1,0 +1,57 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+
+const tools: { title: string; desc: string; href: string }[] = [
+  // { title: "Tool Name", desc: "What it does.", href: "/tools/tool-name" },
+];
+---
+
+<Layout title="Tools">
+  <Nav slot="nav" />
+  <h1>Tools</h1>
+  <p class="sub">Utilities I built for myself — feel free to use them.</p>
+
+  {tools.length === 0 ? (
+    <div class="empty">Nothing here yet. Check back soon.</div>
+  ) : (
+    <ul class="list">
+      {tools.map(t => (
+        <li>
+          <a href={t.href}>
+            <span class="title">{t.title}</span>
+            <span class="desc">{t.desc}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</Layout>
+
+<style>
+  h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .sub { color: var(--muted); margin-bottom: 2rem; }
+  .empty {
+    color: var(--muted);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+  }
+  .list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s;
+  }
+  .list a:hover { border-color: var(--accent); }
+  .title { font-weight: 500; }
+  .desc { color: var(--muted); font-size: 0.875rem; }
+</style>
