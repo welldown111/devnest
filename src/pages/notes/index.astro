@@ -1,10 +1,11 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
+import { getCollection } from "astro:content";
 
-const notes: { title: string; date: string; href: string }[] = [
-  // { title: "Note Title", date: "2026-02-25", href: "/notes/note-slug" },
-];
+const notes = (await getCollection("notes")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
 ---
 
 <Layout title="Notes">
@@ -16,11 +17,11 @@ const notes: { title: string; date: string; href: string }[] = [
     <div class="empty">Nothing here yet. Check back soon.</div>
   ) : (
     <ul class="list">
-      {notes.map(n => (
+      {notes.map(note => (
         <li>
-          <a href={n.href}>
-            <span class="title">{n.title}</span>
-            <span class="date">{n.date}</span>
+          <a href={`/devnest/notes/${note.slug}`}>
+            <span class="title">{note.data.title}</span>
+            <span class="date">{note.data.date.toISOString().slice(0, 10)}</span>
           </a>
         </li>
       ))}
