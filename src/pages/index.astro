@@ -10,12 +10,12 @@ import Nav from "../components/Nav.astro";
     <p>A personal space for tools I've built and notes I've taken.</p>
   </section>
   <section class="cards">
-    <a href={`${import.meta.env.BASE_URL}tools`} class="card">
+    <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/tools`} class="card">
       <span class="icon">⚙️</span>
       <h2>Tools</h2>
       <p>Small utilities I made to solve real problems.</p>
     </a>
-    <a href={`${import.meta.env.BASE_URL}notes`} class="card">
+    <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/notes`} class="card">
       <span class="icon">📝</span>
       <h2>Notes</h2>
       <p>Things I've learned and want to remember.</p>
