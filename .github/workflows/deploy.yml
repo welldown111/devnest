@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'  # 每天凌晨2点自动构建，拉取最新笔记
 
 permissions:
   contents: read
@@ -15,6 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Update submodules to latest
+        run: git submodule update --remote
       - uses: actions/setup-node@v4
         with:
           node-version: 20

@@ -3,9 +3,11 @@ import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import { getCollection } from "astro:content";
 
-const notes = (await getCollection("notes")).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+const allNotes = await getCollection("notes");
+const notes = allNotes
+  .filter(n => n.slug.startsWith("publish/"))
+  .map(n => ({ ...n, urlSlug: n.slug.replace(/^publish\//, "") }))
+  .sort((a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0));
 ---
 
 <Layout title="Notes">
@@ -19,9 +21,9 @@ const notes = (await getCollection("notes")).sort(
     <ul class="list">
       {notes.map(note => (
         <li>
-          <a href={`/devnest/notes/${note.slug}`}>
+          <a href={`/devnest/notes/${note.urlSlug}`}>
             <span class="title">{note.data.title}</span>
-            <span class="date">{note.data.date.toISOString().slice(0, 10)}</span>
+            <span class="date">{note.data.date?.toISOString().slice(0, 10) ?? ""}</span>
           </a>
         </li>
       ))}

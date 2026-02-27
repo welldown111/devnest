@@ -4,11 +4,13 @@ import Nav from "../../components/Nav.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const notes = await getCollection("notes");
-  return notes.map(note => ({
-    params: { slug: note.slug },
-    props: { note },
-  }));
+  const allNotes = await getCollection("notes");
+  return allNotes
+    .filter(n => n.slug.startsWith("publish/"))
+    .map(note => ({
+      params: { slug: note.slug.replace(/^publish\//, "") },
+      props: { note },
+    }));
 }
 
 const { note } = Astro.props;
@@ -19,8 +21,8 @@ const { Content } = await note.render();
   <Nav slot="nav" />
   <article>
     <header>
-      <h1>{note.data.title}</h1>
-      <time>{note.data.date.toISOString().slice(0, 10)}</time>
+      <h1>{note.data.title ?? note.slug.replace(/^publish\//, "")}</h1>
+      {note.data.date && <time>{note.data.date.toISOString().slice(0, 10)}</time>}
       {note.data.description && <p class="desc">{note.data.description}</p>}
     </header>
     <div class="prose">
