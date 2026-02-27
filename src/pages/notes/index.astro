@@ -22,7 +22,7 @@ const notes = allNotes
       {notes.map(note => (
         <li>
           <a href={`/devnest/notes/${note.urlSlug}`}>
-            <span class="title">{note.data.title}</span>
+            <span class="title">{note.data.title ?? note.urlSlug}</span>
             <span class="date">{note.data.date?.toISOString().slice(0, 10) ?? ""}</span>
           </a>
         </li>
